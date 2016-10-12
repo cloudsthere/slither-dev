@@ -17,6 +17,25 @@
         height : 500
     }
 
+    class Map{
+        
+        constructor(options) {
+            this.width = options.width
+            this.height = options.height
+            this.backgroundColor = '#f1f1f1'
+        }
+
+        render() {
+            ctx.clearRect(0, 0, this.width, this.height)
+
+            ctx.fillStyle = this.backgroundColor
+            ctx.fillRect(0, 0, this.width, this.height)
+            
+        }
+    }
+
+    var map = new Map(frame)
+    map.render()
 
     var snake = new Image()
 
@@ -28,10 +47,7 @@
     }
     // l(snake)
     window.addEventListener('mousemove', (e = window.event) => {
-        ctx.clearRect(0, 0, frame.width, frame.height)
 
-        ctx.fillStyle = '#f1f1f1'
-        ctx.fillRect(0, 0, frame.width, frame.height)
 
         l(snake.width, snake.height)
 
@@ -39,21 +55,32 @@
     })
 
     class Food {
-        init(x, y) {
-            
+        constructor(x, y) {
+            this.x = x
+            this.y = y
+            this.render()
+        }
+
+        render() {
+            ctx.fillStyle = '#000000'
+            ctx.fillRect(this.x, this.y, 10, 10)
         }
     }
 
     var foodNum = 100
     var foods = [];
     for (let i = 0; i < foodNum; i++) {
-        let x = parseInt(Math.random() * frame.width)
-        let y = parseInt(Math.random() * frame.height)
-        l(x, y)
+        // let x = parseInt(Math.random() * frame.width)
+        // let y = parseInt(Math.random() * frame.height)
+
+        let x = Math.random() * frame.width
+        let y = Math.random() * frame.height
+        // l(x, y)
         foods[x] = {
             y : new Food(x, y),
         }
     }
+    l(foods)
     // document.body.appendChild(snake)
 
 
