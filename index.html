@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<canvas id="canvas" width="500" height="500"></canvas>
+<!-- <div  style="width : 100px; height : 100px;"></div>*/ -->
+
+</body>
+<script type="text/javascript">
+    var l = console.log.bind(console)
+    var ctx = document.getElementById('canvas').getContext('2d')
+
+    var frame = {
+        width : 500, 
+        height : 500
+    }
+
+
+    var snake = new Image()
+
+    snake.width = 100
+    snake.height = 100
+
+    snake.src = 'http://localhost/slither-dev/1.jpg'
+    snake.onload = function() {
+    }
+    // l(snake)
+    window.addEventListener('mousemove', (e = window.event) => {
+        ctx.clearRect(0, 0, frame.width, frame.height)
+
+        ctx.fillStyle = '#f1f1f1'
+        ctx.fillRect(0, 0, frame.width, frame.height)
+
+        l(snake.width, snake.height)
+
+        ctx.drawImage(snake, e.clientX - snake.width / 2, e.clientY - snake.height / 2, snake.width, snake.height)
+    })
+
+    class Food {
+        init(x, y) {
+            
+        }
+    }
+
+    var foodNum = 100
+    var foods = [];
+    for (let i = 0; i < foodNum; i++) {
+        let x = parseInt(Math.random() * frame.width)
+        let y = parseInt(Math.random() * frame.height)
+        l(x, y)
+        foods[x] = {
+            y : new Food(x, y),
+        }
+    }
+    // document.body.appendChild(snake)
+
+
+
+</script>
+</html>
