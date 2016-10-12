@@ -43,21 +43,25 @@
     snake.height = 100
 
     snake.src = 'http://localhost/slither-dev/1.jpg'
+
     snake.onload = function() {
     }
     // l(snake)
     window.addEventListener('mousemove', (e = window.event) => {
 
-
-        l(snake.width, snake.height)
+        map.render()
+        foods.forEach(function(food){
+            food.render()
+        })
+        // l(snake.width, snake.height)
 
         ctx.drawImage(snake, e.clientX - snake.width / 2, e.clientY - snake.height / 2, snake.width, snake.height)
     })
 
     class Food {
-        constructor(x, y) {
-            this.x = x
-            this.y = y
+        constructor(options) {
+            this.x = options.x
+            this.y = options.y
             this.render()
         }
 
@@ -75,10 +79,8 @@
 
         let x = Math.random() * frame.width
         let y = Math.random() * frame.height
-        // l(x, y)
-        foods[x] = {
-            y : new Food(x, y),
-        }
+
+        foods.push(new Food({x, y}))
     }
     l(foods)
     // document.body.appendChild(snake)
